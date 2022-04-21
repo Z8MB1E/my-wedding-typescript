@@ -21,9 +21,9 @@ const cors_1 = __importDefault(require("cors"));
 const uuid_1 = require("uuid");
 const config_1 = require("./config");
 const app = (0, express_1.default)();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3080;
 const _ = undefined;
-const isWindows = "";
+const isWindows = "build";
 const BASENAME = "";
 const API_URL = `/api`;
 const adminAccess = "marryme";
@@ -249,10 +249,23 @@ app.post(API_URL + "/rsvp/update/:code/:guest", (req, res) => {
         });
     }, 500);
 });
+app.post(API_URL + "/rsvp/updateInvite/:code/notice", (req, res) => {
+    config_1.DB.query(`update rsvpinvitecodes set InviteViewedNotice=1 where InviteCode = '${req.params.code.toUpperCase()}'`, (error, results) => {
+        if (error) {
+            console.error(error);
+            return res.status(500).end();
+        }
+        if (results.rowsAffected === 0)
+            return res.status(400).end();
+        console.log(`Invitees with code ${req.params.code.toUpperCase()} have seen and understood the invite notice.`);
+        // console.log(results);
+        return res.send("SUCCESS").end();
+    });
+});
 app.post(API_URL + "/rsvp/online/new", (req, res) => {
     config_1.DB.query("INSERT INTO rsvponlineguests SET ?", {
-        OnlineGuestFirstName: (req.body.isAnonymous === true ? "" : req.body.firstName),
-        OnlineGuestLastName: (req.body.isAnonymous === true ? "" : req.body.lastName),
+        OnlineGuestFirstName: req.body.isAnonymous === true ? "" : req.body.firstName,
+        OnlineGuestLastName: req.body.isAnonymous === true ? "" : req.body.lastName,
         OnlineGuestIsAnonymous: req.body.isAnonymous,
         OnlineGuestBestWishes: req.body.bestWishes,
         OnlineGuestAllowDisplay: req.body.displayPermitted,
