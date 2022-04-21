@@ -95,7 +95,7 @@ const RegistryView: React.FC<{
         if (element) {
           console.log(element);
           window.scrollTo({
-            top: element.offsetTop * 0.985,
+            top: element.offsetTop,
             behavior: "smooth",
           });
         }
