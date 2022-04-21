@@ -12,7 +12,7 @@ import {
   ProgressBar,
   Row,
 } from "react-bootstrap";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useSearchParams } from "react-router-dom";
 import {
   IRegistryCategory,
   IRegistryGiftFund,
@@ -70,6 +70,8 @@ const RegistryView: React.FC<{
     itemsToShow: 999,
   });
 
+  const [searchParams, setSearchParams] = useSearchParams({});
+
   // const filterRef = useRef<any>(null);
 
   // const [cookies, setCookie] = useCookies(["clientFirstVisit"]);
@@ -84,6 +86,21 @@ const RegistryView: React.FC<{
 
   useEffect(() => {
     setItems(props.items);
+    setTimeout(() => {
+      if (searchParams.get("item")) {
+        var item = searchParams.get("item");
+        var element = document.querySelector(
+          `[data-id='i_${item}']`
+        ) as HTMLElement;
+        if (element) {
+          console.log(element);
+          window.scrollTo({
+            top: element.offsetTop * 0.985,
+            behavior: "smooth",
+          });
+        }
+      }
+    }, 250);
   }, [props.items]);
 
   useEffect(() => {
@@ -339,6 +356,21 @@ const RegistryView: React.FC<{
                         </Form.Select>
                         {/* <Form.Text className="text-danger" hidden={filterRef.current.value !== "claimed_max"}>You're viewing items that have as many claims as quantity we are asking for. Are you sure you want to sort by this filter?</Form.Text> */}
                       </Form.Group>
+                      <Form.Group className="mb-2">
+                        <Form.Label className="text-muted">
+                          Filter by Featured Items
+                        </Form.Label>
+                        <Form.Select
+                          onChange={(e) => {
+                            setShouldRefresh(true);
+                            props.updateFilters({ featured: e.target.value });
+                          }}
+                          // ref={filterRef}
+                        >
+                          <option value="false">All Products</option>
+                          <option value="true">Featured Products Only</option>
+                        </Form.Select>
+                      </Form.Group>
                     </Form>
                     {/* <p className="text-muted">Nothing here at the moment!</p> */}
                   </Col>
@@ -498,7 +530,8 @@ const RegistryView: React.FC<{
                   {items.length > 0 ? (
                     items.map((item, _idx) => {
                       if (
-                        pageData.itemsToShow >= 999 || numberIsBetween(
+                        pageData.itemsToShow >= 999 ||
+                        numberIsBetween(
                           _idx,
                           pageData.currentPage * pageData.itemsToShow -
                             pageData.itemsToShow,
@@ -506,8 +539,16 @@ const RegistryView: React.FC<{
                         )
                       )
                         return (
-                          <Col key={_idx}>
-                            <Card className="h-100 shadow">
+                          <Col key={_idx} data-id={`i_${item.ItemId}`}>
+                            <Card
+                              border={
+                                searchParams.get("item") &&
+                                searchParams.get("item") === item.ItemId.toString()
+                                  ? "primary"
+                                  : ""
+                              }
+                              className="h-100 shadow"
+                            >
                               <div className="imgAndPriceHolder">
                                 <Card.Img
                                   variant="top"
@@ -524,6 +565,16 @@ const RegistryView: React.FC<{
                                   </abbr>
                                 </div>
                               </div>
+                              {item.ItemIsFeatured ? (
+                                <Card.Header as="h6" className="text-primary">
+                                  <i className="fa-solid fa-star fa-fw me-1" />
+                                  Featured
+                                  <span className="text-muted">
+                                    {" "}
+                                    - Highly Desirable
+                                  </span>
+                                </Card.Header>
+                              ) : null}
                               <Card.Body className="d-flex flex-column align-items-baseline">
                                 <Card.Title>
                                   {item.ItemName}
@@ -532,7 +583,7 @@ const RegistryView: React.FC<{
                                       {item.CategoryName}
                                     </span>
                                   ) : undefined}
-                                  <Badge bg="secondary" className="me-1">
+                                  <Badge bg="secondary" className="mt-1 me-1">
                                     {item.ItemClaims}
                                     {item.AmountDesired ? (
                                       <span>

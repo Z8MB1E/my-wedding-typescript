@@ -1,11 +1,17 @@
 import axios from "axios";
+import { useEffect, useState } from "react";
 import { Alert, Button, Col, Container, Nav, Navbar, Row } from "react-bootstrap";
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { API_URL } from "../Config";
 
 const LayoutView: React.FC = () => {
   const pathname = useLocation().pathname;
+  const [currentPath, setCurrentPath] = useState(pathname);
   const NAVIGATE = useNavigate();
+
+  useEffect(() => {
+    setCurrentPath(pathname);
+  }, [pathname]);
 
   const handleLogin = () => {
     axios
@@ -38,7 +44,7 @@ const LayoutView: React.FC = () => {
       <Alert variant="danger" className="mb-0 p-2 text-center"><span><i className="fa-solid fa-warning fa-fw me-1" />This website is <b>under active construction</b>. Not all features are guaranteed to work at this time.</span></Alert>
       <Navbar className="fancyNav">
         <Container>
-          <Nav defaultActiveKey={pathname} className="m-auto gap-3 text-center">
+          <Nav activeKey={currentPath} className="m-auto gap-3 text-center">
             <Nav.Link as={Link} to="/" eventKey="/">
               Home
             </Nav.Link>

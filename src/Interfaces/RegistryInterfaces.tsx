@@ -11,6 +11,7 @@ export interface IRegistryItem {
   ItemPurchaseURL: string;
   EstimatedPrice: string;
   RawPrice: number;
+  ItemIsFeatured: boolean;
   CategoryName?: string;
   ItemClaims?: number;
   AmountDesired?: number;

@@ -10,12 +10,13 @@ import {
   Row,
 } from "react-bootstrap";
 // import { run as runHolder } from "holderjs/holder";
-import { useHolderjs } from 'use-holderjs';
+import { useHolderjs } from "use-holderjs";
 import { useEffect } from "react";
+import { env } from "process";
 
 const WeddingPartyView: React.FC = () => {
   useHolderjs();
-  
+
   useEffect(() => {
     document.title = "Wedding Party - Jason & Alyssa";
   }, []);
@@ -33,15 +34,23 @@ const WeddingPartyView: React.FC = () => {
           <hr className="w-50 mx-auto" />
         </Col>
       </Row>
-      <Row className="w-75 m-auto">
-        <Col>
+      <Row className="w-lg-100 w-xl-75 m-auto">
+        <Col className="party-members">
           <div className="text-center m-auto mb-4">
             <i className="fa-solid fa-users fa fw" />
             <h2>The Bridal Party</h2>
           </div>
-          <Row className="bg-light rounded border-1 p-3 shadow mb-3">
-            <Col md={3}>
-              <img src="holder.js/250x250?auto=yes" className="rounded" />
+          <Row className="bg-light rounded border-1 p-3 shadow mb-3 gy-2">
+            <Col
+              md={3}
+              className="d-flex justify-content-center justify-content-md-start"
+            >
+              {/* <img src="holder.js/250x250?auto=yes" className="rounded-3" /> */}
+              <img
+                src={process.env.PUBLIC_URL + "/Assets/Images/alyssa-alice.jpg"}
+                className="rounded-3"
+                alt="Alice Crowe"
+              />
             </Col>
             <Col className="d-flex flex-column justify-content-center">
               <h1 className="mb-0">Alice Crowe</h1>
@@ -59,7 +68,7 @@ const WeddingPartyView: React.FC = () => {
               </p>
             </Col>
           </Row>
-          <Row className="bg-light rounded border-1 p-3 shadow mb-3">
+          <Row className="bg-light rounded border-1 p-3 shadow mb-3 gy-2">
             <Col md={3}>
               <img src="holder.js/250x250?auto=yes" className="rounded" />
             </Col>
@@ -77,9 +86,15 @@ const WeddingPartyView: React.FC = () => {
               </p>
             </Col>
           </Row>
-          <Row className="bg-light rounded border-1 p-3 shadow mb-3">
+          <Row className="bg-light rounded border-1 p-3 shadow mb-3 gy-2">
             <Col md={3}>
-              <img src="holder.js/250x250?auto=yes" className="rounded" />
+              {/* <img src="holder.js/250x250?auto=yes" className="rounded" /> */}
+              <img
+                src={process.env.PUBLIC_URL + "/Assets/Images/alyssa-taryn.jpg"}
+                className="rounded"
+                style={{ objectPosition: "top" }}
+                alt="Taryn Waugh"
+              />
             </Col>
             <Col className="d-flex flex-column justify-content-center">
               <h1 className="mb-0">Taryn Waugh</h1>
@@ -97,9 +112,12 @@ const WeddingPartyView: React.FC = () => {
               </p>
             </Col>
           </Row>
-          <Row className="bg-light rounded border-1 p-3 shadow mb-3">
+          <Row className="bg-light rounded border-1 p-3 shadow mb-3 gy-2">
             <Col md={3}>
-              <img src="holder.js/250x250?auto=yes" className="rounded" />
+              <img
+                src={process.env.PUBLIC_URL + "/Assets/Images/alyssa-lb.jpg"}
+                className="rounded"
+              />
             </Col>
             <Col className="d-flex flex-column justify-content-center">
               <h1 className="mb-0">Laura Beth Hurst</h1>
@@ -115,12 +133,27 @@ const WeddingPartyView: React.FC = () => {
               </p>
             </Col>
           </Row>
-          <Row className="bg-light rounded border-1 p-3 shadow mb-3">
-            <Col md={3}>
-              <img src="holder.js/250x250?auto=yes" className="rounded" />
+          <Row className="bg-light rounded border-1 p-3 shadow mb-3 gy-2">
+            <Col md={3} className="m-auto">
+              <img
+                src={process.env.PUBLIC_URL + "/Assets/Images/rachel-lilah.jpg"}
+                className="rounded"
+                style={{height: "350px"}}
+              />
             </Col>
             <Col className="d-flex flex-column justify-content-center">
-              <h1 className="mb-0">Lilah Van Fossen</h1>
+              <h3 className="mb-0">Rachel Fraley <span className="fs-6 fw-normal small text-muted">(on left)</span></h3>
+              <p className="lead text-muted">
+                Flowergirl
+                <i className="ms-1 bi-flower3" />
+              </p>
+              <p>
+                Rachel is one of Jason’s little sisters (and now Alyssa’s).
+                Similar to Lilah, Rachel is very free willed and creative. With
+                four younger siblings, she is very bossy but also caring.
+              </p>
+              <hr />
+              <h3 className="mb-0">Lilah Van Fossen <span className="fs-6 fw-normal small text-muted">(on right)</span></h3>
               <p className="lead text-muted">
                 Flowergirl
                 <i className="ms-1 bi-flower3" />
@@ -133,9 +166,9 @@ const WeddingPartyView: React.FC = () => {
               </p>
             </Col>
           </Row>
-          <Row className="bg-light rounded border-1 p-3 shadow mb-3">
+          {/* <Row className="bg-light rounded border-1 p-3 shadow mb-3 gy-2">
             <Col md={3}>
-              <img src="holder.js/250x250?auto=yes" className="rounded" />
+              <img src={process.env.PUBLIC_URL + "/Assets/Images/rachel-lilah.jpg"} className="rounded" />
             </Col>
             <Col className="d-flex flex-column justify-content-center">
               <h1 className="mb-0">Rachel Fraley</h1>
@@ -149,8 +182,11 @@ const WeddingPartyView: React.FC = () => {
                 four younger siblings, she is very bossy but also caring.
               </p>
             </Col>
-          </Row>
+          </Row> */}
         </Col>
+      </Row>
+      <Row>
+        <Alert variant="warning" className="w-md-75 w-sm-100 m-auto text-center"><i className="fa-solid fa-hammer fa-fw me-1" /> The section for the party of the groom is currently under construction. The information for this section will be added in a future update.</Alert>
       </Row>
     </Container>
   );

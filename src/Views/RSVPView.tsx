@@ -8,7 +8,6 @@ import {
   Fade,
   Form,
   Row,
-  Table,
 } from "react-bootstrap";
 import { IRSVPInviteeData } from "../Controllers/RSVPController";
 

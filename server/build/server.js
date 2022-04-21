@@ -187,6 +187,22 @@ app.post(API_URL + "/registry/items/new", isAuthenticated, (req, res) => {
         return res.send("Inserted successfully.").end();
     });
 });
+app.get(API_URL + "/registry/featured_items", (req, res) => {
+    config_1.DB.query(
+    // `select * from registryitems r where ItemIsFeatured=1 limit 5;`,
+    `select r.*, c.CategoryName, (select count(*) from registryclaims cl where cl.ItemId = r.ItemId) as ItemClaims from registryitems r left join registrycategories c on r.CategoryId = c.CategoryId where ItemIsFeatured=1 order by r.RawPrice desc`, (error, results) => {
+        if (error) {
+            console.error(error);
+            return res.status(500).end();
+        }
+        if (results.length === 0) {
+            console.warn("A request to view featured items failed as there are no featured items in the database.");
+            return res.status(400).end();
+        }
+        console.log("Retrieved Top 5 featured items.");
+        return res.send(results).end();
+    });
+});
 app.get(API_URL + "/registry/giftfunds", (req, res) => {
     config_1.DB.query("SELECT * FROM registrygiftfunds", (error, results) => {
         if (error) {

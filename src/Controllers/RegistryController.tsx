@@ -27,6 +27,7 @@ const RegistryController: React.FC = () => {
     price: "",
     date: "",
     claimed: "",
+    featured: "false",
   });
 
   const [searchParams] = useSearchParams();
@@ -70,6 +71,7 @@ const RegistryController: React.FC = () => {
         ItemPurchaseURL: item.ItemPurchaseURL,
         EstimatedPrice: item.EstimatedPrice,
         RawPrice: item.RawPrice,
+        ItemIsFeatured: item.ItemIsFeatured,
         CategoryName: item.CategoryName || undefined,
         ItemClaims: item.ItemClaims,
         AmountDesired: item.AmountDesired,
@@ -82,6 +84,7 @@ const RegistryController: React.FC = () => {
     //  The filters go in this order:
     //    - Date added.
     //    - Is claimed.
+    //    - Is featured.
     //    - Price.
 
     switch (filters.date) {
@@ -106,6 +109,16 @@ const RegistryController: React.FC = () => {
       case "unclaimed":
         filteredItemList = filteredItemList.filter(
           (item) => (item.ItemClaims || 0) === 0
+        );
+        break;
+      default:
+        break;
+    }
+
+    switch (filters.featured) {
+      case "true":
+        filteredItemList = filteredItemList.filter(
+          (item) => item.ItemIsFeatured
         );
         break;
       default:
@@ -253,6 +266,7 @@ const RegistryController: React.FC = () => {
           price: string;
           date: string;
           claimed: string;
+          featured: string;
         }) => {
           setFilters({ ...filters, ...args });
         }}
