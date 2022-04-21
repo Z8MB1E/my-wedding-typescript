@@ -94,9 +94,8 @@ const RegistryView: React.FC<{
         ) as HTMLElement;
         if (element) {
           console.log(element);
-          window.scrollTo({
-            top: element.offsetTop,
-            behavior: "smooth",
+          element.scrollIntoView({
+            block: "center",
           });
         }
       }
@@ -543,7 +542,8 @@ const RegistryView: React.FC<{
                             <Card
                               border={
                                 searchParams.get("item") &&
-                                searchParams.get("item") === item.ItemId.toString()
+                                searchParams.get("item") ===
+                                  item.ItemId.toString()
                                   ? "primary"
                                   : ""
                               }
