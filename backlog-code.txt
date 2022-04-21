@@ -1,0 +1,29 @@
+{/* <Form.Group>
+                        <Form.Label className="text-muted">
+                          Filter by Price Range
+                        </Form.Label>
+                        <MultiRangeSlider min={0} max={1000} onChange={() => {}}/>
+                        <div className="d-flex justify-content-center align-items-center">
+                          <Form.Control
+                            type="number"
+                            min={sliderValues.min}
+                            max={sliderValues.curMax - 1}
+                            defaultValue={sliderValues.min}
+                            onChange={(e) =>
+                              setSliderValues({...sliderValues, curMin: Number(e.target.value) })
+                            }
+                          />
+                          <i className="fa-solid fa-minus fa-fw mx-1" />
+                          <Form.Control
+                            type="number"
+                            min={sliderValues.curMin + 1}
+                            max={sliderValues.max}
+                            pattern="[0-9]{2}"
+                            defaultValue={sliderValues.max}
+                            onChange={(e) =>
+                              setSliderValues({...sliderValues, curMax: Number(e.target.value) })
+                            }
+                          />
+                        </div>
+                        {(sliderValues.curMin !== 0 || sliderValues.curMax !== 1000) && <Form.Text className="text-primary">To see all results, change the minimum back to <b>0</b> and/or the maximum back to <b>1000</b>.</Form.Text>}
+                      </Form.Group> */}

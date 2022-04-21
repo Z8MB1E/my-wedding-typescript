@@ -1,0 +1,195 @@
+@import "../../node_modules/bootstrap/scss/functions";
+@import "../../node_modules/bootstrap/scss/variables";
+@import "../../node_modules/bootstrap/scss/utilities";
+@import "../../node_modules/bootstrap/scss/mixins";
+@import "../../node_modules/bootstrap-icons/font/bootstrap-icons.scss";
+
+// FONT: Dancing Script
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;0,900;1,200;1,300;1,400;1,600;1,700;1,900&display=swap");
+
+// FONT: Jost
+@import url("https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+/**============================================
+ *               MAIN BODY DEFS
+ *=============================================**/
+#root {
+  background: radial-gradient(white, #e2e2e2);
+  min-height: 100vh;
+}
+
+.navbar.fancyNav .nav-link {
+  font-family: "Dancing Script", "cursive";
+  font-weight: bold !important;
+  font-size: larger !important;
+  color: black !important;
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    height: 1px;
+    background: salmon;
+    transition: all 0.15s ease-in-out;
+    width: 0;
+    bottom: 3px;
+  }
+
+  &:hover {
+    color: salmon !important;
+
+    &::after {
+      width: 100%;
+      left: 0;
+    }
+  }
+
+  &.active {
+    color: salmon !important;
+  }
+}
+
+.row.jumbotron {
+  background: url("~/public/a_j_running.jpg") center/cover no-repeat;
+
+  .popout {
+    background: url("~/public/paper-texture.jpg") center/cover no-repeat;
+    -webkit-filter: brightness(1.25);
+    filter: brightness(1.25);
+    padding: 5rem;
+  }
+}
+
+.days-counter {
+  font-family: "Jost", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 400;
+}
+
+// .registry-container {
+//   h1, h2, h3, h4, h5, h6 {
+//     color: #444 !important;
+//   }
+// }
+
+.imgAndPriceHolder {
+  position: relative;
+
+  .priceDiv {
+    position: absolute;
+    display: inline-block;
+    right: 0;
+    bottom: 0;
+    padding: 0.5rem;
+    font-size: x-large;
+    font-weight: bold;
+    background: white;
+    border-radius: 5px 0 0 0;
+  }
+
+  .card-img-top {
+    object-fit: cover;
+    height: 15vw;
+    width: 100%;
+
+    @media screen and (max-width: 768px) {
+      & {
+        height: 40vh !important;
+      }
+    }
+  }
+}
+
+.pageNotFoundContainer {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.page-center {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.fv-sc {
+  font-variant: small-caps !important;
+}
+
+.modal-dialog.modal-75w {
+  width: 75%;
+  max-width: none !important;
+}
+
+.modal-dialog.modal-50w {
+  width: 50%;
+  max-width: none !important;
+}
+@include media-breakpoint-down(lg) {
+  .modal-dialog.modal-50w {
+    width: 75%;
+    max-width: none !important;
+  }
+}
+
+// .modal-fullscreen-sm-down,
+// .modal-fullscreen-md-down,
+// .modal-fullscreen-lg-down,
+// .modal-fullscreen-xl-down,
+// .modal-fullscreen-xxl-down {
+//   width: 100vw !important;
+//   max-width: none;
+//   height: 100%;
+//   margin: 0;
+// }
+
+/**============================================
+ *               TEXT CLASSES
+ *=============================================**/
+.fancytext {
+  font-family: "Dancing Script", cursive;
+  font-weight: bold;
+}
+
+.fs-xl {
+  font-size: 3rem !important;
+}
+
+.fs-xxl {
+  font-size: 3.5rem !important;
+}
+
+/**========================================================================
+ *                           BOOTSTRAP EXTENSIONS
+ *========================================================================**/
+
+$sizes: (
+  25: 25%,
+  50: 50%,
+  75: 75%,
+  100: 100%,
+  auto: auto,
+);
+
+@each $breakpoint in map-keys($grid-breakpoints) {
+  @each $size, $length in $sizes {
+    @include media-breakpoint-up($breakpoint) {
+      .w-#{$breakpoint}-#{$size} {
+        width: $length !important;
+      }
+    }
+  }
+}
+
+@import "../../node_modules/bootstrap/scss/bootstrap";
