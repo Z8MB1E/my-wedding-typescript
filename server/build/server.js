@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+require("dotenv/config");
 const express_1 = __importDefault(require("express"));
 const express_session_1 = __importDefault(require("express-session"));
 const path_1 = __importDefault(require("path"));
@@ -22,8 +23,8 @@ const uuid_1 = require("uuid");
 const config_1 = require("./config");
 const app = (0, express_1.default)();
 const port = process.env.PORT || 3080;
+const isWindows = process.env.ISWINDOWS || "";
 const _ = undefined;
-const isWindows = "build";
 const BASENAME = "";
 const API_URL = `/api`;
 const adminAccess = "marryme";
@@ -130,7 +131,7 @@ app.get(API_URL + "/registry/categories", (req, res) => {
     });
 });
 app.get(API_URL + "/registry/items", (req, res) => {
-    config_1.DB.query(`select r.*, c.CategoryName, (select count(*) from registryclaims cl where cl.ItemId = r.ItemId) as ItemClaims from registryitems r left join registrycategories c on r.CategoryId = c.CategoryId order by r.ItemId desc`, (error, results) => {
+    config_1.DB.query(`select r.*, c.CategoryName, (select count(*) from registryclaims cl where cl.ItemId = r.ItemId) as ItemClaims from registryitems r left join registrycategories c on r.CategoryId = c.CategoryId where ItemIsHidden=0 order by r.ItemId desc`, (error, results) => {
         if (error) {
             console.error(error);
             return res.status(500).end();
@@ -190,7 +191,7 @@ app.post(API_URL + "/registry/items/new", isAuthenticated, (req, res) => {
 app.get(API_URL + "/registry/featured_items", (req, res) => {
     config_1.DB.query(
     // `select * from registryitems r where ItemIsFeatured=1 limit 5;`,
-    `select r.*, c.CategoryName, (select count(*) from registryclaims cl where cl.ItemId = r.ItemId) as ItemClaims from registryitems r left join registrycategories c on r.CategoryId = c.CategoryId where ItemIsFeatured=1 order by r.RawPrice desc`, (error, results) => {
+    `select r.*, c.CategoryName, (select count(*) from registryclaims cl where cl.ItemId = r.ItemId) as ItemClaims from registryitems r left join registrycategories c on r.CategoryId = c.CategoryId where ItemIsFeatured=1 and ItemIsHidden=0 order by r.RawPrice desc`, (error, results) => {
         if (error) {
             console.error(error);
             return res.status(500).end();

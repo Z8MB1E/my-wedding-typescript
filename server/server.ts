@@ -10,6 +10,7 @@
 // const axios = require("axios");
 // const app = express();
 
+import 'dotenv/config';
 import express, { NextFunction } from "express";
 import session from "express-session";
 import path from "path";
@@ -18,8 +19,8 @@ import { v4 as uuidv4 } from "uuid";
 import { DB } from "./config";
 const app = express();
 const port = process.env.PORT || 3080;
+const isWindows = process.env.ISWINDOWS || "";
 const _ = undefined;
-const isWindows = "build";
 const BASENAME = "";
 const API_URL = `/api`;
 const adminAccess = "marryme";
@@ -161,7 +162,7 @@ app.get(API_URL + "/registry/categories", (req, res) => {
 
 app.get(API_URL + "/registry/items", (req, res) => {
   DB.query(
-    `select r.*, c.CategoryName, (select count(*) from registryclaims cl where cl.ItemId = r.ItemId) as ItemClaims from registryitems r left join registrycategories c on r.CategoryId = c.CategoryId order by r.ItemId desc`,
+    `select r.*, c.CategoryName, (select count(*) from registryclaims cl where cl.ItemId = r.ItemId) as ItemClaims from registryitems r left join registrycategories c on r.CategoryId = c.CategoryId where ItemIsHidden=0 order by r.ItemId desc`,
     (error, results) => {
       if (error) {
         console.error(error);
@@ -189,7 +190,7 @@ app.get(API_URL + "/registry/get_stats", (req, res) => {
 
 app.get(API_URL + "/registry/items/:id", (req, res) => {
   DB.query(
-    "select r.*, c.CategoryName, ( select count(*) from registryclaims cl where cl.ItemId = r.ItemId) as ItemClaims from registryitems r left join registrycategories c on r.CategoryId = c.CategoryId where r.CategoryId = ? order by r.ItemId desc",
+    "select r.*, c.CategoryName, ( select count(*) from registryclaims cl where cl.ItemId = r.ItemId) as ItemClaims from registryitems r left join registrycategories c on r.CategoryId = c.CategoryId where r.CategoryId = ? and r.ItemIsHidden=0 order by r.ItemId desc",
     [req.params.id],
     (error, results) => {
       if (error) {
@@ -249,7 +250,7 @@ app.post(API_URL + "/registry/items/new", isAuthenticated, (req, res) => {
 app.get(API_URL + "/registry/featured_items", (req, res) => {
   DB.query(
     // `select * from registryitems r where ItemIsFeatured=1 limit 5;`,
-    `select r.*, c.CategoryName, (select count(*) from registryclaims cl where cl.ItemId = r.ItemId) as ItemClaims from registryitems r left join registrycategories c on r.CategoryId = c.CategoryId where ItemIsFeatured=1 order by r.RawPrice desc`,
+    `select r.*, c.CategoryName, (select count(*) from registryclaims cl where cl.ItemId = r.ItemId) as ItemClaims from registryitems r left join registrycategories c on r.CategoryId = c.CategoryId where ItemIsFeatured=1 and ItemIsHidden=0 order by r.RawPrice desc`,
     (error, results) => {
       if (error) {
         console.error(error);

@@ -14,3 +14,4 @@ exports.DB = mysql_1.default.createPool({
     password: "Production1365#",
     database: "wedding-site",
 });
+// export const isWindows = "build";

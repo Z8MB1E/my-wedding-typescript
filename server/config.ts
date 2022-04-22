@@ -8,3 +8,5 @@ export const DB = mysql.createPool({
   password: "Production1365#",
   database: "wedding-site",
 });
+
+// export const isWindows = "build";
