@@ -149,7 +149,7 @@ app.get(API_URL + "/registry/get_stats", (req, res) => {
     });
 });
 app.get(API_URL + "/registry/items/:id", (req, res) => {
-    config_1.DB.query("select r.*, c.CategoryName, ( select count(*) from registryclaims cl where cl.ItemId = r.ItemId) as ItemClaims from registryitems r left join registrycategories c on r.CategoryId = c.CategoryId where r.CategoryId = ? order by r.ItemId desc", [req.params.id], (error, results) => {
+    config_1.DB.query("select r.*, c.CategoryName, ( select count(*) from registryclaims cl where cl.ItemId = r.ItemId) as ItemClaims from registryitems r left join registrycategories c on r.CategoryId = c.CategoryId where r.CategoryId = ? and r.ItemIsHidden=0  order by r.ItemId desc", [req.params.id], (error, results) => {
         if (error) {
             console.error(error);
             return res.status(500).end();
@@ -248,11 +248,10 @@ app.get(API_URL + "/rsvp/get/:code", (req, res) => {
 });
 app.post(API_URL + "/rsvp/update/:code/:guest", (req, res) => {
     setTimeout(() => {
+        var _a;
         config_1.DB.query(`update rsvpguestlist g inner join rsvpinvitecodes c on g.GuestInviteCode = c.InviteCodeId set ? where GuestId = ${req.body.id} and c.InviteCode = '${req.params.code}'`, {
             GuestIntent: req.body.intent,
-            GuestFoodRestrictions: req.body.foodRestrictions !== ("" || "None")
-                ? req.body.foodRestrictions
-                : "None",
+            GuestFoodRestrictions: (_a = req.body.foodRestrictions) !== null && _a !== void 0 ? _a : "None",
         }, (error, results) => {
             if (error) {
                 console.error(error);

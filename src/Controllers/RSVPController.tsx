@@ -33,10 +33,10 @@ const DEBUG_INITIAL_DATA: IRSVPInviteeData = {
   guests: [
     {
       id: 0,
-      first: "Jason",
-      last: "Fraley",
+      first: "",
+      last: "",
       intent: "MAYBE",
-      foodRestrictions: "None",
+      foodRestrictions: "",
     },
   ],
   comments: "",
@@ -101,6 +101,7 @@ const RSVPController: React.FC = () => {
   const handleSaveData = async (inviteeData: IRSVPInviteeData) => {
     return new Promise<void>((resolve, reject) => {
       inviteeData.guests.forEach((guest) => {
+        console.log(guest);
         axios
           .post(`${API_URL}/rsvp/update/${inviteCode}/${guest.id}`, guest)
           .then(() => resolve())

@@ -70,7 +70,12 @@ const WeddingPartyView: React.FC = () => {
           </Row>
           <Row className="bg-light rounded border-1 p-3 shadow mb-3 gy-2">
             <Col md={3}>
-              <img src="holder.js/250x250?auto=yes" className="rounded" />
+              {/* <img src="holder.js/250x250?auto=yes" className="rounded" /> */}
+              <img
+                src={process.env.PUBLIC_URL + "/Assets/Images/alyssa-katelyn.jpeg"}
+                className="rounded"
+                alt="Katelyn Grant"
+              />
             </Col>
             <Col className="d-flex flex-column justify-content-center">
               <h1 className="mb-0">Katelyn Grant</h1>

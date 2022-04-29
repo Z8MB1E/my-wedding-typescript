@@ -237,7 +237,7 @@ const RSVPView: React.FC<{
                   <Form.Label>Physical Invite Code</Form.Label>
                   <Row
                     className={
-                      (UIData.isValidCode ? "w-md-25" : "w-md-50") + " m-auto"
+                      (UIData.isValidCode ? "w-lg-25" : "w-lg-50") + " m-auto"
                     }
                     xs={4}
                   >
@@ -498,12 +498,12 @@ const RSVPView: React.FC<{
                             <Form.Label>Food Restrictions</Form.Label>
                             <Form.Control
                               as="textarea"
-                              id="guestFoodRestrictions"
-                              name="guestFoodRestrictions"
+                              id="foodRestrictions"
+                              name="foodRestrictions"
                               defaultValue={guest.foodRestrictions}
-                              // onChange={(e) =>
-                              //   handleGuestDataChange(e, _idx, guest.id)
-                              // }
+                              onChange={(e) =>
+                                handleGuestDataChange(e, _idx, guest.id)
+                              }
                             />
                           </Form.Group>
                         </Col>

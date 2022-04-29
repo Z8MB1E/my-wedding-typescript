@@ -190,7 +190,7 @@ app.get(API_URL + "/registry/get_stats", (req, res) => {
 
 app.get(API_URL + "/registry/items/:id", (req, res) => {
   DB.query(
-    "select r.*, c.CategoryName, ( select count(*) from registryclaims cl where cl.ItemId = r.ItemId) as ItemClaims from registryitems r left join registrycategories c on r.CategoryId = c.CategoryId where r.CategoryId = ? and r.ItemIsHidden=0 order by r.ItemId desc",
+    "select r.*, c.CategoryName, ( select count(*) from registryclaims cl where cl.ItemId = r.ItemId) as ItemClaims from registryitems r left join registrycategories c on r.CategoryId = c.CategoryId where r.CategoryId = ? and r.ItemIsHidden=0  order by r.ItemId desc",
     [req.params.id],
     (error, results) => {
       if (error) {
@@ -336,9 +336,7 @@ app.post(API_URL + "/rsvp/update/:code/:guest", (req, res) => {
       {
         GuestIntent: req.body.intent,
         GuestFoodRestrictions:
-          req.body.foodRestrictions !== ("" || "None")
-            ? req.body.foodRestrictions
-            : "None",
+          req.body.foodRestrictions ?? "None",
       },
       (error, results) => {
         if (error) {

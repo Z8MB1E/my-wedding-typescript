@@ -51,9 +51,9 @@ const LayoutView: React.FC = () => {
             <Nav.Link as={Link} to="/registry" eventKey="/registry">
               Registry
             </Nav.Link>
-            {/* <Nav.Link as={Link} to="/wedding-party" eventKey="/wedding-party">
+            <Nav.Link as={Link} to="/wedding-party" eventKey="/wedding-party">
               Wedding Party
-            </Nav.Link> */}
+            </Nav.Link>
             <Nav.Link as={Link} to="/rsvp" eventKey="/rsvp">
               RSVP
             </Nav.Link>
