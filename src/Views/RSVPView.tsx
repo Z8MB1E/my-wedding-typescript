@@ -9,6 +9,7 @@ import {
   Form,
   Row,
 } from "react-bootstrap";
+import { toast } from "react-toastify";
 import { IRSVPInviteeData } from "../Controllers/RSVPController";
 
 const RSVPView: React.FC<{
@@ -191,9 +192,16 @@ const RSVPView: React.FC<{
   };
 
   const handleSaveData = (inviteeData: IRSVPInviteeData) => {
-    props.handleSaveData(inviteeData).then(() => {
-      setUIData({ ...UIData, unsavedData: false });
-    });
+    toast.promise(
+      props.handleSaveData(inviteeData).then(() => {
+        setUIData({ ...UIData, unsavedData: false });
+      }),
+      {
+        pending: "Saving changes...",
+        success: "Changes saved!",
+        error: "Could not save changes!",
+      }
+    );
   };
 
   return (
@@ -353,8 +361,8 @@ const RSVPView: React.FC<{
                 invitation list, you wouldn’t bring them along. The venue is
                 small and we want it to be an intimate wedding and even if we
                 like your grandmother’s sister’s best friend, we ask that you
-                don’t bring them if they are not <i>explicitly mentioned </i>in your
-                invitation.
+                don’t bring them if they are not <i>explicitly mentioned </i>in
+                your invitation.
               </p>
               <p>
                 Thank you for reading this note and our requests, however odd or
