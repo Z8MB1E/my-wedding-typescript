@@ -111,6 +111,11 @@ const RegistryController: React.FC = () => {
           (item) => (item.ItemClaims || 0) === 0
         );
         break;
+        case "claimed_hide_max":
+        filteredItemList = filteredItemList.filter(
+          (item) => (item.ItemClaims || 0) !== (item.AmountDesired)
+        );
+        break;
       default:
         break;
     }

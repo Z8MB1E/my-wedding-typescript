@@ -238,11 +238,11 @@ const RegistryView: React.FC<{
             <p>
               <h5>Ship to:</h5>
               <a
-                href="https://www.google.com/maps/place/Mount+Vernon+Nazarene+University/@40.3753799,-82.4713082,16.25z"
+                href="https://goo.gl/maps/8y8UHDeBUJzCfg79A"
                 target="_blank"
                 rel="noreferrer"
               >
-                Box F-2318, 800 Martinsburg Rd, Mt Vernon, OH 43050
+                114 Mitchell Ave, Mount Vernon, OH 43050
               </a>
             </p>
             {isAdmin && (
@@ -349,8 +349,11 @@ const RegistryView: React.FC<{
                           <option value="">No Sorting</option>
                           <option value="unclaimed">Unclaimed Only</option>
                           <option value="claimed">Claimed Only</option>
-                          <option value="claimed_max">
+                          {/* <option value="claimed_max">
                             Maximum Claimed Only
+                          </option> */}
+                          <option value="claimed_hide_max">
+                            Hide Maxed Claims
                           </option>
                         </Form.Select>
                         {/* <Form.Text className="text-danger" hidden={filterRef.current.value !== "claimed_max"}>You're viewing items that have as many claims as quantity we are asking for. Are you sure you want to sort by this filter?</Form.Text> */}
@@ -460,7 +463,7 @@ const RegistryView: React.FC<{
                           <Card border="success" className="h-100 shadow">
                             <Card.Header className="fv-sc fw-bold text-secondary">
                               <i className="fa-solid fa-gift fa-fw" /> Gift Fund
-                              {progress !== -1 ? (
+                              {/* {progress !== -1 ? (
                                 <ProgressBar
                                   variant="success"
                                   now={progress}
@@ -479,7 +482,7 @@ const RegistryView: React.FC<{
                                   className="w-100 mt-2"
                                   style={{ height: "25px" }}
                                 />
-                              )}
+                              )} */}
                             </Card.Header>
                             <Card.Img
                               variant="top"
@@ -553,6 +556,7 @@ const RegistryView: React.FC<{
                                 <Card.Img
                                   variant="top"
                                   src={item.ItemImageURL}
+                                  alt={item.ItemName}
                                 />
                                 <div className="priceDiv">
                                   <abbr
@@ -622,7 +626,7 @@ const RegistryView: React.FC<{
                                   }
                                 >
                                   <i className="fa-solid fa-cart-shopping fa-fw" />
-                                  &nbsp;Purchase and claim!
+                                  &nbsp;View Product
                                 </Button>
                               </Card.Body>
                             </Card>
