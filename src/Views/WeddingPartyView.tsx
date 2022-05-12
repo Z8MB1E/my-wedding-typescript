@@ -72,7 +72,9 @@ const WeddingPartyView: React.FC = () => {
             <Col md={3}>
               {/* <img src="holder.js/250x250?auto=yes" className="rounded" /> */}
               <img
-                src={process.env.PUBLIC_URL + "/Assets/Images/alyssa-katelyn.jpeg"}
+                src={
+                  process.env.PUBLIC_URL + "/Assets/Images/alyssa-katelyn.jpeg"
+                }
                 className="rounded"
                 alt="Katelyn Grant"
               />
@@ -143,11 +145,16 @@ const WeddingPartyView: React.FC = () => {
               <img
                 src={process.env.PUBLIC_URL + "/Assets/Images/rachel-lilah.jpg"}
                 className="rounded"
-                style={{height: "350px"}}
+                style={{ height: "350px" }}
               />
             </Col>
             <Col className="d-flex flex-column justify-content-center">
-              <h3 className="mb-0">Rachel Fraley <span className="fs-6 fw-normal small text-muted">(on left)</span></h3>
+              <h3 className="mb-0">
+                Rachel Fraley{" "}
+                <span className="fs-6 fw-normal small text-muted">
+                  (on left)
+                </span>
+              </h3>
               <p className="lead text-muted">
                 Flowergirl
                 <i className="ms-1 bi-flower3" />
@@ -158,7 +165,12 @@ const WeddingPartyView: React.FC = () => {
                 four younger siblings, she is very bossy but also caring.
               </p>
               <hr />
-              <h3 className="mb-0">Lilah Van Fossen <span className="fs-6 fw-normal small text-muted">(on right)</span></h3>
+              <h3 className="mb-0">
+                Lilah Van Fossen{" "}
+                <span className="fs-6 fw-normal small text-muted">
+                  (on right)
+                </span>
+              </h3>
               <p className="lead text-muted">
                 Flowergirl
                 <i className="ms-1 bi-flower3" />
@@ -190,8 +202,97 @@ const WeddingPartyView: React.FC = () => {
           </Row> */}
         </Col>
       </Row>
-      <Row>
-        <Alert variant="warning" className="w-md-75 w-sm-100 m-auto text-center"><i className="fa-solid fa-hammer fa-fw me-1" /> The section for the party of the groom is currently under construction. The information for this section will be added in a future update.</Alert>
+      <Row className="w-lg-100 w-xl-75 m-auto">
+        <div className="text-center m-auto my-4">
+          <i className="fa-solid fa-users fa fw" />
+          <h2>The Groomsmen</h2>
+        </div>
+        <Col className="party-members">
+          <Row sm={1} md={2} className="g-2">
+            <Col sm={12}>
+              <div className="d-flex flex-column bg-white shadow-md rounded border-1 p-3 h-100">
+                <h3 className="mb-0">Joseph Hurst</h3>
+                <p className="lead text-muted">Groomsman</p>
+                <p>
+                  When Jason's sister Laura Beth first met Joseph Hurst during
+                  the university production of Little Women, it wouldn't be long
+                  before strangers became friends and friends became family.
+                  Now, Jason is proud to call Joseph his brother(-in-law) as
+                  much as he's proud to call him a friend. Joseph has worked
+                  extra hard to make sure that Jason has a good and easy
+                  wedding, and the support Joseph has given to Jason has not
+                  gone unrecognized. Joseph is a light for Christ and a man
+                  after God's own heart, something Jason appreciates about him
+                  immensely. Joseph intends to graduate from MVNU with a degree
+                  in ministry, and Jason is excited to see where God takes him.
+                </p>
+              </div>
+            </Col>
+            <Col sm={12}>
+              <div className="d-flex flex-column bg-white shadow-md rounded border-1 p-3 h-100">
+                <h3 className="mb-0">Noah Hill</h3>
+                <p className="lead text-muted">Groomsman</p>
+                <p>
+                  Jason first met Noah back in 2010 as a fellow student at their
+                  homeschool co-op, School on the Rock. It took 0.25 seconds
+                  before they struck up a friendship that has lasted throughout
+                  the years. From sharing film ideas together in the school
+                  cafeteria, to joining each other for many hours of Minecraft,
+                  to staying in touch through a long-running tabletop RPG game
+                  with friends, Noah has always been there for Jason. He
+                  recently graduated from Cedarville University with honors and
+                  a Bachelor's Degree in Allied Health (this man is legitimately
+                  a genius, trust me!) Jason is so proud of Noah's achievements
+                  and is blessed beyond measure to be able to call Noah his
+                  friend.
+                </p>
+              </div>
+            </Col>
+            <Col sm={12}>
+              <div className="d-flex flex-column bg-white shadow-md rounded border-1 p-3 h-100">
+                <h3 className="mb-0">Adam Beres</h3>
+                <p className="lead text-muted">Groomsman</p>
+                <p>
+                  From the earliest days of Jason's youth up to this very
+                  moment, Adam has been a constant source of encouragement,
+                  guidance, and fun. As Jason's uncle, Adam has always held a
+                  special place in Jason's heart. From his early days of
+                  inconceivable magic tricks and lending his Xbox to Jason and
+                  his cousins, to later years of mentorship, guidance, and
+                  support, Adam has made an impression the likes of which Jason
+                  one day wishes to replicate with his own nieces and nephews:
+                  not only to be the "fun" uncle, but to love unconditionally. Adam's
+                  dedication to his wife, kids, and family is a beautiful thing
+                  and reflection of the character of Christ. Jason is proud to
+                  have his uncle Adam as a groomsman on his special day.
+                </p>
+              </div>
+            </Col>
+            <Col sm={12}>
+              <div className="d-flex flex-column bg-white shadow-md rounded border-1 p-3 h-100">
+                <h3 className="mb-0">Elijah Ellis</h3>
+                <p className="lead text-muted">Groomsman</p>
+                <p>
+                  What started out as a mutual connection around a tabletop RPG
+                  game quickly blossomed over the last two years into an
+                  unforeseen but truly real friendship. A crazy fact: Jason has
+                  never actually met Elijah in person until this moment. Despite
+                  that, Jason sees Elijah as a true friend and brother. From
+                  having long midnight conversations about nerdy subjects to
+                  receiving completely unnecessary but completely appreciated
+                  gifts and support in all sorts of ways, Jason is more than
+                  thankful for the blessing Elijah has been in his life. Plus,
+                  Elijah has been there from before Jason and Alyssa were even
+                  dating, and has been supportive and encouraging ever since!
+                  Jason cannot wait to meet Elijah in person and finally cement
+                  what he has known all along: that Elijah is a truly awesome
+                  guy.
+                </p>
+              </div>
+            </Col>
+            {/* <Alert variant="warning" className="w-md-75 w-sm-100 m-auto text-center"><i className="fa-solid fa-hammer fa-fw me-1" /> The section for the party of the groom is currently under construction. The information for this section will be added in a future update.</Alert> */}
+          </Row>
+        </Col>
       </Row>
     </Container>
   );
